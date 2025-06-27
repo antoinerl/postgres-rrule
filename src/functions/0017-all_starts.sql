@@ -53,7 +53,7 @@ DECLARE
   year int := EXTRACT(YEAR FROM "dtstart")::integer;
   month int := EXTRACT(MONTH FROM "dtstart")::integer;
   year_end timestamp := make_timestamp(EXTRACT(YEAR FROM _rrule.until($1, $2))::integer, 12, 31, 23, 59, 59);
-  first_of_month timestamp := make_timestamp(year, month, 1, 0, 0,0);
+  first_of_month timestamp := make_timestamp(year, month, 1, EXTRACT(HOUR FROM "dtstart")::integer, EXTRACT(MINUTE FROM "dtstart")::integer,EXTRACT(SECOND FROM "dtstart")::integer);
 BEGIN
   RETURN QUERY 
 	WITH begin_months AS (
