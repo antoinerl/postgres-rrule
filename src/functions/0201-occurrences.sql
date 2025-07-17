@@ -11,7 +11,7 @@ RETURNS SETOF TIMESTAMP AS $$
   "params" AS (
     SELECT
       "until",
-      "interval",
+      "interval"
     FROM _rrule.until($1, $2) "until"
     FULL OUTER JOIN _rrule.build_interval($1) "interval" ON (true)
   ),
