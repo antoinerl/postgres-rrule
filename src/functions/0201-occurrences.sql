@@ -25,6 +25,7 @@ RETURNS SETOF TIMESTAMP AS $$
      FROM "params"
      FULL OUTER JOIN "starts" ON (true)
      WHERE ($1."bysetpos" IS NOT NULL)
+     AND ($1."bysetpos"[1] < 5 OR EXTRACT (MONTH FROM "start") = EXTRACT (MONTH FROM "start" + ($1."bysetpos"[1] - 1) * interval '1 week'))
   ),
   "ordered" AS (
     SELECT DISTINCT "occurrence"
